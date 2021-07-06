@@ -1,10 +1,54 @@
 version: '3.9'
 
 services:
+  # Nginx Config
   nginx:
+    # Name des Containers
     container_name: nginx
-    image: nginx:${NGINX_VERSION}
+
+    # Build-File
+    build:
+      context: ./nginx
+      args:
+        NGINX_VERSION: ${NGINX_VERSION}
+    
+    # Verzeichnisse verknüpfen
+    volumes:
+      # Projekte
+      - ${PROJECT_VOLUME}:/var/projects
+      # Configs
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites/:/etc/nginx/sites-available
+      - ./nginx/conf.d/:/etc/nginx/conf.d
+
+    # php-fpm Container muss vorhanden sein
+    depends_on:
+      - php-fpm
+        
+    # Portmapping
     ports:
-      - "${NGINX_PORT}:80"
+      - "${NGINX_PORT}:80"      
+  
+  # PHP-FPM Config
+  php-fpm:
+    # Name des Containers
+    container_name: php-fpm
+
+    # Build-File
+    build:
+      context: ./php-fpm
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+
+    # Verzeichnisse verknüpfen
+    volumes:
+      # Muss das gleiche Mapping sein wie bei nginx!
+      - ${PROJECT_VOLUME}:/var/projects  
+
       
-      
+# Volumes definieren
+volumes:
+  private-volume:
+    # Volume wird extern erstellt und nicht von Docker Compose
+    external: true
+                
