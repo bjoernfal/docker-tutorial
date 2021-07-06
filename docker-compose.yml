@@ -2,8 +2,9 @@ version: '3.9'
 
 services:
   nginx:
-    image: nginx:alpine
+    container_name: nginx
+    image: nginx:${NGINX_VERSION}
     ports:
-      - "1234:80"
+      - "${NGINX_PORT}:80"
       
       
