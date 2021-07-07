@@ -1,6 +1,30 @@
 version: '3.9'
 
 services:
+  # Shell Config
+  shell:
+    # Name des Containers
+    container_name: shell
+
+    # Hostname
+    hostname: "${COMPOSE_PROJECT_NAME}-shell"
+
+    # Build-File
+    build:
+      context: ./shell
+      args:
+        SHELL_USER_SSHKEY: ${SHELL_USER_SSHKEY}
+        PHP_VERSION: ${PHP_VERSION}
+    
+    # Verzeichnisse verknüpfen
+    volumes:
+      - ${PROJECT_VOLUME}:/var/projects
+
+    # Portmapping
+    ports:
+      - "${SHELL_SSH_PORT}:22"
+
+
   # Nginx Config
   nginx:
     # Name des Containers
