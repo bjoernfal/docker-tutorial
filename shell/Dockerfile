@@ -8,6 +8,8 @@ FROM ubuntu:20.04
 ####################################################
 ARG SHELL_USER_SSHKEY
 ARG PHP_VERSION
+ARG GIT_EMAIL
+ARG GIT_USER
 
 # Interaktiv machen, denn manche APT-Pakete wollen interagieren. Wir nicht.
 ARG DEBIAN_FRONTEND=noninteractive
@@ -61,6 +63,9 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 # PHP
 RUN add-apt-repository ppa:ondrej/php -y
 
+# Git
+RUN git config --global user.email "${GIT_EMAIL}"
+RUN git config --global user.name "${GIT_USER}"
 
 ####################################################
 # Zusätzliche Pakete installieren
@@ -70,7 +75,9 @@ RUN apt-get update && apt-get install -y \
 	yarn \
 	php$PHP_VERSION \
 	php$PHP_VERSION-mysql \
-	php$PHP_VERSION-xml 
+	php$PHP_VERSION-xml \
+	php$PHP_VERSION-sqlite \
+	php$PHP_VERSION-mbstring
 
 
 
