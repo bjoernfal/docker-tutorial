@@ -90,9 +90,9 @@ services:
     # Daten- und Log-Verzeichnis außerhalb des Containers festlegen
     volumes:
       # Lib
-      - ./var/lib/mysql/:/var/lib/mysql/
+      - ./var/mysql/lib:/var/lib/mysql/
       # Logs
-      - ./var/log/mysql/:/var/log/mysql/
+      - ./var/mysql/log:/var/log/mysql/
 
       
 # Volumes definieren
