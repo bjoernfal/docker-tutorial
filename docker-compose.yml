@@ -71,6 +71,29 @@ services:
       # Muss das gleiche Mapping sein wie bei nginx!
       - ${PROJECT_VOLUME}:/var/projects  
 
+  # MySQL Config
+  mysql:
+    # Name des Containers
+    container_name: mysql
+
+    # Direktes Image anstatt Dockerfile
+    image: mariadb:${MARIADB_VERSION}
+
+    # Ports
+    ports:
+      - "${MYSQL_PORT}:3306"
+
+    # Configs
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASS}
+
+    # Daten- und Log-Verzeichnis außerhalb des Containers festlegen
+    volumes:
+      # Lib
+      - ./var/lib/mysql/:/var/lib/mysql/
+      # Logs
+      - ./var/log/mysql/:/var/log/mysql/
+
       
 # Volumes definieren
 volumes:

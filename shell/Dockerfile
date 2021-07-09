@@ -33,7 +33,8 @@ RUN apt-get update && apt-get install -y \
 	openssh-server \
 	mc \
 	software-properties-common \
-	git 
+	git \
+	mysql-client
 	
 
 
