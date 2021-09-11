@@ -48,7 +48,6 @@ services:
       
 # Volumes definieren
 volumes:
-  private-volume:
-    # Volume wird extern erstellt und nicht von Docker Compose
-    external: true
+  project-volume:
+    name: ${PROJECT_VOLUME}
                 
