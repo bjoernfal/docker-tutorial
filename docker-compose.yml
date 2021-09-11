@@ -4,7 +4,7 @@ services:
   # Shell Config
   shell:
     # Name des Containers
-    container_name: shell
+    container_name: ${COMPOSE_PROJECT_NAME}_shell
 
     # Hostname
     hostname: "${COMPOSE_PROJECT_NAME}-shell"
@@ -28,7 +28,7 @@ services:
   # Nginx Config
   nginx:
     # Name des Containers
-    container_name: nginx
+    container_name: ${COMPOSE_PROJECT_NAME}_nginx
 
     # Build-File
     build:
@@ -56,7 +56,7 @@ services:
   # PHP-FPM Config
   php-fpm:
     # Name des Containers
-    container_name: php-fpm
+    container_name: ${COMPOSE_PROJECT_NAME}_php-fpm
 
     # Build-File
     build:
