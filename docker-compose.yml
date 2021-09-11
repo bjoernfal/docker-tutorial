@@ -20,7 +20,7 @@ services:
     
     # Verzeichnisse verknüpfen
     volumes:
-      - ${PROJECT_VOLUME}:/var/projects
+      - project-volume:/var/projects
 
     # Portmapping
     ports:
@@ -41,7 +41,7 @@ services:
     # Verzeichnisse verknüpfen
     volumes:
       # Projekte
-      - ${PROJECT_VOLUME}:/var/projects
+      - project-volume:/var/projects
       # Configs
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/sites/:/etc/nginx/sites-available
@@ -69,12 +69,10 @@ services:
     # Verzeichnisse verknüpfen
     volumes:
       # Muss das gleiche Mapping sein wie bei nginx!
-      - ${PROJECT_VOLUME}:/var/projects  
+      - project-volume:/var/projects  
 
       
 # Volumes definieren
 volumes:
-  private-volume:
-    # Volume wird extern erstellt und nicht von Docker Compose
-    external: true
-                
+  project-volume:
+    name: ${PROJECT_VOLUME}
