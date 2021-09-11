@@ -4,7 +4,7 @@ services:
   # Nginx Config
   nginx:
     # Name des Containers
-    container_name: nginx
+    container_name: ${COMPOSE_PROJECT_NAME}_nginx
 
     # Build-File
     build:
@@ -32,7 +32,7 @@ services:
   # PHP-FPM Config
   php-fpm:
     # Name des Containers
-    container_name: php-fpm
+    container_name: ${COMPOSE_PROJECT_NAME}_php-fpm
 
     # Build-File
     build:
